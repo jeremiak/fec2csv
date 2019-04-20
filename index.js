@@ -11,6 +11,7 @@ const outputDirArg = process.argv[3]
 
 if (!inputFileArg) {
   console.error('Whoops, make sure you supply the input filename as the first argument')
+  process.exit(1)
   return
 }
 
@@ -50,6 +51,18 @@ const createStreamWriter = (outputPath, columns) => {
   }
 }
 
+/**
+ * Normalize form type strings so we can
+ * use it for the file name
+ * @param {string} formType
+ * @returns {string} normalizedFormType 
+ */
+const normalizeFormType = formType => {
+  const normalized = formType.replace(/\//g, '-')
+
+  return normalized
+}
+
 const spinner = ora(`Reading ${inputPath}, will create CSVs from it`).start()
 
 fs.createReadStream(inputPath)
@@ -58,14 +71,16 @@ fs.createReadStream(inputPath)
     const { form_type, filer_committee_id_number } = chunk
 
     if (!form_type) return
-    if (!outputStreams[form_type]) {
+
+    const normalizedFormType = normalizeFormType(form_type)
+    if (!outputStreams[normalizedFormType]) {
       const columns = Object.keys(chunk)
-      const outputPath = createOutputPath(filer_committee_id_number, form_type)
+      const outputPath = createOutputPath(filer_committee_id_number, normalizedFormType)
       const writer = createStreamWriter(outputPath, columns)
-      outputStreams[form_type] = writer
+      outputStreams[normalizedFormType] = writer
     }
 
-    outputStreams[form_type](chunk)
+    outputStreams[normalizedFormType](chunk)
   })
   .on('end', () => {
     const fileCount = Object.keys(outputStreams).length
