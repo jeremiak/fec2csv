@@ -1,6 +1,7 @@
 # FEC fillings to CSV
-
 A small CLI tool to take a `.fec` filing and turn it into a collection of CSVs, one for each form type.
+
+[![CircleCI](https://circleci.com/gh/jeremiak/fec2csv.svg?style=svg)](https://circleci.com/gh/jeremiak/fec2csv)
 
 ## Installation & usage
 
