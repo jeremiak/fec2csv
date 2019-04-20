@@ -1,0 +1,30 @@
+{
+  "name": "fec2csv",
+  "version": "1.0.0",
+  "description": "A CLI tool to take an FEC filing and turn it into a bunch of CSVs.",
+  "main": "index.js",
+  "bin": {
+    "fec2csv": "./index.js"
+  },
+  "engines": {
+    "node": ">=10"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "fec",
+    "csv",
+    "parser"
+  ],
+  "author": "Jeremia Kimelman (https://www.jeremiak.com)",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jeremiak/fec2csv.git"
+  },
+  "dependencies": {
+    "fec-parse": "^0.17.0",
+    "ora": "^3.4.0"
+  }
+}
