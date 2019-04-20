@@ -1,10 +1,10 @@
 #!/bin/bash
 
 # make sure can use the cli
-npm link && cd test
+cd test
 
 # run the tool without FEC file
-WITHOUT_INPUT_EXIT_CODE=$(fec2csv ; echo $?)
+WITHOUT_INPUT_EXIT_CODE=$(../index.js ; echo $?)
 
 # and make sure we get an error
 if [ $WITHOUT_INPUT_EXIT_CODE -ne 1 ]
@@ -13,7 +13,7 @@ then
 fi
 
 # run the tool
-fec2csv sample.fec
+../index.js sample.fec
 
 # get the number of resulting CSV files
 NUMBER_OF_GENERATED_FILES=$(ls -l *.csv | wc -l)
