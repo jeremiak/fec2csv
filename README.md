@@ -5,8 +5,10 @@ A small CLI tool to take a `.fec` filing and turn it into a collection of CSVs, 
 
 ## Installation & usage
 
-`$ npm install -g fec2csv`
-`$ fec2csv path/to/file.fec path/to/output/dir`
+```
+$ npm install -g fec2csv`
+$ fec2csv path/to/file.fec [path/to/output/dir]
+```
 
 `fec2csv` expects at least one argument but can take two. The first one, which is required, is the path to the `.fec` source file. The second, which is optional, is the path to the directory where `fec2csv` should put the generated files. This will default to the current directory (`.`).
 
