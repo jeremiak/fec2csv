@@ -41,10 +41,18 @@ const createStreamWriter = (outputPath, columns) => {
   writer.write(`${columns.join(',')}\n`)
 
   return data => {
-    var values = []
+    const values = []
 
-    columns.forEach(col => {
-      values.push(data[col])
+    columns.forEach((col, colIndex) => {
+        const value = data[col]
+
+        // handle cases where there is a comma in the cell's value
+        if (value && value.includes(',')) {
+          values.push(`"${data[col]}"`)
+          return
+        }
+
+        values.push(data[col])
     })
 
     writer.write(`${values.join(',')}\n`)
